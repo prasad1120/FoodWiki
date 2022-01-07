@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		395A94AF27880CEF0016DA3C /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395A94AE27880CEF0016DA3C /* CategoryCell.swift */; };
 		39D6F63527853E170096B1B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F63427853E170096B1B7 /* AppDelegate.swift */; };
 		39D6F63727853E170096B1B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F63627853E170096B1B7 /* SceneDelegate.swift */; };
 		39D6F63927853E170096B1B7 /* MealsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F63827853E170096B1B7 /* MealsTableVC.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		395A94AE27880CEF0016DA3C /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		39D6F63127853E170096B1B7 /* FoodWiki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodWiki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39D6F63427853E170096B1B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39D6F63627853E170096B1B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		39D6F6662785598E0096B1B7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				395A94AE27880CEF0016DA3C /* CategoryCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				39D6F63927853E170096B1B7 /* MealsTableVC.swift in Sources */,
 				39D6F66B278563B80096B1B7 /* Category.swift in Sources */,
 				39D6F63527853E170096B1B7 /* AppDelegate.swift in Sources */,
+				395A94AF27880CEF0016DA3C /* CategoryCell.swift in Sources */,
 				39D6F66D2785722D0096B1B7 /* DataService.swift in Sources */,
 				39D6F66927855A3A0096B1B7 /* NetworkService.swift in Sources */,
 				39D6F63727853E170096B1B7 /* SceneDelegate.swift in Sources */,
