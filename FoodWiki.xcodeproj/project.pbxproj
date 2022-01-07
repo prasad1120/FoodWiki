@@ -16,6 +16,9 @@
 		39D6F64C27853E190096B1B7 /* FoodWikiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F64B27853E190096B1B7 /* FoodWikiTests.swift */; };
 		39D6F65627853E190096B1B7 /* FoodWikiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F65527853E190096B1B7 /* FoodWikiUITests.swift */; };
 		39D6F65827853E190096B1B7 /* FoodWikiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F65727853E190096B1B7 /* FoodWikiUITestsLaunchTests.swift */; };
+		39D6F66927855A3A0096B1B7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F66827855A3A0096B1B7 /* NetworkService.swift */; };
+		39D6F66B278563B80096B1B7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F66A278563B80096B1B7 /* Category.swift */; };
+		39D6F66D2785722D0096B1B7 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F66C2785722C0096B1B7 /* DataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		39D6F65127853E190096B1B7 /* FoodWikiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodWikiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39D6F65527853E190096B1B7 /* FoodWikiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodWikiUITests.swift; sourceTree = "<group>"; };
 		39D6F65727853E190096B1B7 /* FoodWikiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodWikiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		39D6F66827855A3A0096B1B7 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		39D6F66A278563B80096B1B7 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		39D6F66C2785722C0096B1B7 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,10 @@
 		39D6F63327853E170096B1B7 /* FoodWiki */ = {
 			isa = PBXGroup;
 			children = (
+				39D6F665278559820096B1B7 /* Model */,
+				39D6F6662785598E0096B1B7 /* View */,
+				39D6F664278559790096B1B7 /* Controller */,
+				39D6F6672785599F0096B1B7 /* Service */,
 				39D6F63427853E170096B1B7 /* AppDelegate.swift */,
 				39D6F63627853E170096B1B7 /* SceneDelegate.swift */,
 				39D6F63A27853E170096B1B7 /* Main.storyboard */,
@@ -132,6 +142,30 @@
 				39D6F63827853E170096B1B7 /* MealsTableVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		39D6F665278559820096B1B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				39D6F66A278563B80096B1B7 /* Category.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		39D6F6662785598E0096B1B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		39D6F6672785599F0096B1B7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				39D6F66827855A3A0096B1B7 /* NetworkService.swift */,
+				39D6F66C2785722C0096B1B7 /* DataService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,7 +300,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				39D6F63927853E170096B1B7 /* MealsTableVC.swift in Sources */,
+				39D6F66B278563B80096B1B7 /* Category.swift in Sources */,
 				39D6F63527853E170096B1B7 /* AppDelegate.swift in Sources */,
+				39D6F66D2785722D0096B1B7 /* DataService.swift in Sources */,
+				39D6F66927855A3A0096B1B7 /* NetworkService.swift in Sources */,
 				39D6F63727853E170096B1B7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
