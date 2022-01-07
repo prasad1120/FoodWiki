@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MealsTableVC.swift
 //  FoodWiki
 //
 //  Created by Prasad Shinde on 1/4/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MealsTableVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
