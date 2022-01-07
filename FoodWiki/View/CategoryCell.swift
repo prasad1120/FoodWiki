@@ -9,6 +9,8 @@ import UIKit
 
 class CategoryCell: UITableViewCell {
     
-    @IBOutlet weak var someLabel: UILabel!
+    @IBOutlet weak var thumb: UIImageView!
+    @IBOutlet weak var categoryName: UILabel!
+    @IBOutlet weak var categoryDescription: UILabel!
     
 }
