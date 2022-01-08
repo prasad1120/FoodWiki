@@ -11,10 +11,15 @@ class MealsTableVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.prefetchDataSource = self
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        if let categories = DataService.shared.categories {
+            return categories.count
+        } else {
+            return 1
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,25 +38,56 @@ class MealsTableVC: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+                
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
         
-        cell.categoryName.text = "FoodWiki"
-        cell.categoryDescription.text = "Dessert is a course that concludes a meal. The course usually consists of sweet foods, such as confections dishes or fruit, and possibly a beverage such as dessert wine or liqueur, however in the United States it may include coffee, cheeses, nuts, or other savory items regarded as a separate course elsewhere. In some parts of the world, such as much of central and western Africa, and most parts of China, there is no tradition of a dessert course to conclude a meal.\r\n\r\nThe term dessert can apply to many confections, such as biscuits, cakes, cookies, custards, gelatins, ice creams, pastries, pies, puddings, and sweet soups, and tarts. Fruit is also commonly found in dessert courses because of its naturally occurring sweetness. Some cultures sweeten foods that are more commonly savory to create desserts."
+        let categoryObj = DataService.shared.getCategoryData(at: indexPath.section) { category in
+            DispatchQueue.main.async {
+                cell.setCategoryData(categoryData: category)
+                tableView.reloadData()
+                
+            }
+        }
         
-        cell.thumb.image = UIImage(named: "MainIcon")
+        if let categoryObj = categoryObj {
+            cell.setCategoryData(categoryData: categoryObj)
+        } else {
+            cell.setCategoryUILoading()
+        }
+        
+        
+        let categoryThumb = DataService.shared.getImage(at: indexPath.section, { downloadedImg in
+            DispatchQueue.main.async {
+                cell.setImage(img: downloadedImg)
+            }
+        })
+        
+        if let categoryThumb = categoryThumb {
+            cell.setImage(img: categoryThumb)
+        } else {
+            cell.setImageViewLoading()
+        }
+        
         return cell
     }
 }
 
 
-//extension MealsTableVC: UITableViewDataSourcePrefetching {
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        <#code#>
-//    }
-//
+extension MealsTableVC: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        for indexPath in indexPaths {
+            
+            _ = DataService.shared.getImage(at: indexPath.section, { downloadedImg in
+                DispatchQueue.main.async {
+                    self.tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
+                }
+            })
+        }
+    }
+
 //    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
 //        <#code#>
 //    }
-//}
-//
+}
+

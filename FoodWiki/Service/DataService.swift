@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 class DataService {
@@ -13,4 +14,35 @@ class DataService {
     static let shared = DataService()
     
     var categories: [Category]?
+    
+    func getImage(at index: Int, _ completion: ((_ img: UIImage) -> Void)?) -> UIImage? {
+        
+        guard let imgData = categories?[index].imageData else {
+            
+            if let url = categories?[index].strCategoryThumb {
+                NetworkService.shared.downloadImg(index: index, imgUrl: url) { downloadedImg in
+                    self.categories?[index].imageData = downloadedImg
+                    completion?(downloadedImg)
+                }
+            }
+            
+            return nil
+        }
+        
+        return imgData
+    }
+    
+    func getCategoryData(at index: Int, _ completion: @escaping (_ category: Category) -> Void) -> Category? {
+        
+        guard let _ = categories else {
+            NetworkService.shared.downloadCategories { categoryAPIResponse in
+                self.categories = categoryAPIResponse.categories
+                completion(categoryAPIResponse.categories[index])
+            }
+            
+            return nil
+        }
+        
+        return categories?[index]
+    }
 }
