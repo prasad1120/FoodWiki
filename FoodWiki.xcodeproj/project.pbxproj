@@ -20,6 +20,7 @@
 		39D6F66927855A3A0096B1B7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F66827855A3A0096B1B7 /* NetworkService.swift */; };
 		39D6F66B278563B80096B1B7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F66A278563B80096B1B7 /* Category.swift */; };
 		39D6F66D2785722D0096B1B7 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F66C2785722C0096B1B7 /* DataService.swift */; };
+		39FB038927893EE0006EF328 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FB038827893EE0006EF328 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		39D6F66827855A3A0096B1B7 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		39D6F66A278563B80096B1B7 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		39D6F66C2785722C0096B1B7 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		39FB038827893EE0006EF328 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				39D6F63D27853E190096B1B7 /* Assets.xcassets */,
 				39D6F63F27853E190096B1B7 /* LaunchScreen.storyboard */,
 				39D6F64227853E190096B1B7 /* Info.plist */,
+				39FB038827893EE0006EF328 /* Utilities.swift */,
 			);
 			path = FoodWiki;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				395A94AF27880CEF0016DA3C /* CategoryCell.swift in Sources */,
 				39D6F66D2785722D0096B1B7 /* DataService.swift in Sources */,
 				39D6F66927855A3A0096B1B7 /* NetworkService.swift in Sources */,
+				39FB038927893EE0006EF328 /* Utilities.swift in Sources */,
 				39D6F63727853E170096B1B7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
