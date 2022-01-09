@@ -57,13 +57,13 @@ class CategoryCell: UITableViewCell {
         UIView.transition(with: categoryName,
                           duration: animationTime,
                           options: .transitionCrossDissolve,
-                          animations: { [weak self] in self?.categoryName.text = categoryData.strCategory },
+                          animations: { [weak self] in self?.categoryName.text = categoryData.name },
                           completion: nil)
         
         UIView.transition(with: categoryDescription,
                           duration: animationTime,
                           options: .transitionCrossDissolve,
-                          animations: { [weak self] in self?.categoryDescription.text = categoryData.strCategoryDescription},
+                          animations: { [weak self] in self?.categoryDescription.text = categoryData.description},
                           completion: nil)
     }
     

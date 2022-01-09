@@ -74,11 +74,8 @@ class CategoriesTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let categoryDetailsVC = storyboard.instantiateViewController(identifier: "CategoryDetailsVC") as! CategoryDetailsVC
-//
-//        self.navigationController?.pushViewController(categoryDetailsVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "ShowMealsSegue", sender: indexPath)
     }
     
     
@@ -89,6 +86,14 @@ class CategoriesTableVC: UITableViewController {
                 
                 if let index = sender as? IndexPath {
                     categoryDetailsVC.setData(category: DataService.shared.categories![index.section])
+                }
+            }
+            
+            if segueIdentifier == "ShowMealsSegue",
+               let mealsTableVC = segue.destination as? MealsTableVC {
+                
+                if let index = sender as? IndexPath {
+                    mealsTableVC.setData(categoryName: DataService.shared.categories![index.section].name)
                 }
             }
         }

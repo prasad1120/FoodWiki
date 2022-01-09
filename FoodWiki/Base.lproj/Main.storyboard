@@ -28,14 +28,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="210"/>
                                             <color key="backgroundColor" systemColor="systemFillColor"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FoodWiki" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYF-oC-jWU">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dessert" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYF-oC-jWU">
                                             <rect key="frame" x="20" y="226" width="301" height="30"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie5-Oc-O1r">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ie5-Oc-O1r">
                                             <rect key="frame" x="20" y="258" width="334" height="31"/>
+                                            <mutableString key="text">Dessert is a course that concludes a meal. The course usually consists of sweet foods, such as confections dishes or fruit, and possibly a beverage such as dessert wine or liqueur, however in the United States it may include coffee, cheeses, nuts, or other savory items regarded as a separate course elsewhere. In some parts of the world, such as much of central and western Africa, and most parts of China, there is no tradition of a dessert course to conclude a meal.\r\n\r\nThe term dessert can apply to many confections, such as biscuits, cakes, cookies, custards, gelatins, ice creams, pastries, pies, puddings, and sweet soups, and tarts. Fruit is also commonly found in dessert courses because of its naturally occurring sweetness. Some cultures sweeten foods that are more commonly savory to create desserts.Dessert is a course that concludes a meal. The course usually consists of sweet foods, such as confections dishes or fruit, and possibly a beverage such as dessert wine or liqueur, however in the United States it may include coffee, cheeses, nuts, or other savory items regarded as a separate course elsewhere. In some parts of the world, such as much of central and western Africa, and most parts of China, there is no tradition of a dessert course to conclude a meal.\r\n\r\nThe term dessert can apply to many confections, such as biscuits, cakes, cookies, custards, gelatins, ice creams, pastries, pies, puddings, and sweet soups, and tarts. Fruit is also commonly found in dessert courses because of its naturally occurring sweetness. Some cultures sweeten foods that are more commonly savory to create desserts.</mutableString>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                             <nil key="highlightedColor"/>
@@ -82,6 +83,7 @@
                     <navigationItem key="navigationItem" title="Categories" id="au2-Ex-ioF"/>
                     <connections>
                         <segue destination="wXb-iL-Kwo" kind="presentation" identifier="ShowCategoryDetailSegue" id="hKt-2I-5ZI"/>
+                        <segue destination="72e-LX-obp" kind="show" identifier="ShowMealsSegue" id="FZj-q0-fxc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khW-lS-fMO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -162,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFf-Q2-gK6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2414" y="123"/>
+            <point key="canvasLocation" x="2603" y="-219"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PXR-sV-Si7">
@@ -181,6 +183,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VE9-Fn-L8n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="366.66666666666669" y="122.54464285714285"/>
+        </scene>
+        <!--Meals-->
+        <scene sceneID="k6L-KX-T4U">
+            <objects>
+                <tableViewController id="72e-LX-obp" customClass="MealsTableVC" customModule="FoodWiki" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" rowHeight="300" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="TLk-vA-i0r">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MealCell" rowHeight="250" id="yEl-U7-IEx" customClass="MealCell" customModule="FoodWiki" customModuleProvider="target">
+                                <rect key="frame" x="20" y="49.5" width="374" height="250"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yEl-U7-IEx" id="7LT-Qp-5oP">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="250"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fRf-55-b9S">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="175"/>
+                                            <color key="backgroundColor" systemColor="systemFillColor"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2b-sL-gvQ">
+                                            <rect key="frame" x="20" y="191" width="346" height="43"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="q2b-sL-gvQ" secondAttribute="trailing" constant="-12" id="4N1-Md-lNX"/>
+                                        <constraint firstItem="fRf-55-b9S" firstAttribute="top" secondItem="7LT-Qp-5oP" secondAttribute="top" id="6kH-DJ-YKV"/>
+                                        <constraint firstAttribute="trailing" secondItem="fRf-55-b9S" secondAttribute="trailing" id="8he-Ik-drB"/>
+                                        <constraint firstItem="q2b-sL-gvQ" firstAttribute="leading" secondItem="7LT-Qp-5oP" secondAttribute="leadingMargin" id="8lY-Rp-qa4"/>
+                                        <constraint firstItem="fRf-55-b9S" firstAttribute="height" secondItem="7LT-Qp-5oP" secondAttribute="height" multiplier="0.7" id="ARf-MJ-YH4"/>
+                                        <constraint firstItem="q2b-sL-gvQ" firstAttribute="top" secondItem="fRf-55-b9S" secondAttribute="bottom" constant="16" id="T78-xG-eOv"/>
+                                        <constraint firstAttribute="bottom" secondItem="q2b-sL-gvQ" secondAttribute="bottom" constant="16" id="kLc-Hr-VPW"/>
+                                        <constraint firstItem="fRf-55-b9S" firstAttribute="leading" secondItem="7LT-Qp-5oP" secondAttribute="leading" id="xjo-wr-SXn"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                <connections>
+                                    <outlet property="nameLbl" destination="q2b-sL-gvQ" id="and-bk-Gkc"/>
+                                    <outlet property="thumbImgView" destination="fRf-55-b9S" id="VhI-GP-qAG"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="72e-LX-obp" id="Dpk-U1-jsN"/>
+                            <outlet property="delegate" destination="72e-LX-obp" id="Etf-5C-8GI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Meals" id="Li5-Yf-fEm"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wyY-RI-o9F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2603" y="457"/>
         </scene>
     </scenes>
     <resources>

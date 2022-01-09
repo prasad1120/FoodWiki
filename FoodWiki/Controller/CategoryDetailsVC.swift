@@ -17,13 +17,13 @@ class CategoryDetailsVC: UIViewController {
     
     @IBOutlet weak var categoryNameLbl: UILabel! {
         didSet {
-            categoryNameLbl.text = category.strCategory
+            categoryNameLbl.text = category.name
         }
     }
     
     @IBOutlet weak var categoryDescriptionLbl: UILabel! {
         didSet {
-            categoryDescriptionLbl.text = category.strCategoryDescription
+            categoryDescriptionLbl.text = category.description
         }
     }
     
