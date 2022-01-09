@@ -50,10 +50,8 @@ class MealsTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 
         let cell = tableView.dequeueReusableCell(withIdentifier: "MealCell", for: indexPath) as! MealCell
-        // cell.delegate = self
         
         let mealInfoObj = DataService.shared.getMealInfoData(at: indexPath.section, categoryName: categoryName) { mealInfo in
-            cell.setMealInfo(mealInfo: mealInfo)
             tableView.reloadData()
         }
         
@@ -64,8 +62,8 @@ class MealsTableVC: UITableViewController {
         }
         
         
-        let mealThumb = DataService.shared.getImage(at: indexPath.section, categoryName: categoryName, { downloadedImg in
-            cell.setImage(img: downloadedImg)
+        let mealThumb = DataService.shared.getImage(at: indexPath.section, categoryName: categoryName, { _ in
+            tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
         })
 
         if let mealThumb = mealThumb {

@@ -44,7 +44,6 @@ class CategoriesTableVC: UITableViewController {
         cell.delegate = self
         
         let categoryObj = DataService.shared.getCategoryData(at: indexPath.section) { category in
-            cell.setCategoryData(categoryData: category)
             tableView.reloadData()
         }
         
@@ -54,9 +53,8 @@ class CategoriesTableVC: UITableViewController {
             cell.setCategoryUILoading()
         }
         
-        
-        let categoryThumb = DataService.shared.getImage(at: indexPath.section, { downloadedImg in
-            cell.setImage(img: downloadedImg)
+        let categoryThumb = DataService.shared.getImage(at: indexPath.section, { _ in
+            tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
         })
         
         if let categoryThumb = categoryThumb {
