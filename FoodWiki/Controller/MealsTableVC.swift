@@ -76,7 +76,7 @@ class MealsTableVC: UITableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let categoryDetailsVC = storyboard.instantiateViewController(identifier: "CategoryDetailsVC") as! CategoryDetailsVC
         categoryDetailsVC.setData(category: DataService.shared.categories![index.section])
-        categoryDetailsVC.modalPresentationStyle = .popover
+        categoryDetailsVC.modalPresentationStyle = .automatic
         categoryDetailsVC.modalTransitionStyle = .coverVertical
                 
         present(categoryDetailsVC, animated: true, completion: nil)
