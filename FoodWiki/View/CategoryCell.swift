@@ -49,6 +49,7 @@ class CategoryCell: UITableViewCell {
         setImageViewLoading()
         UIView.animate(withDuration: animationTime) {
             
+            self.moreInfoImgView.isHidden = false
             self.categoryName.layer.backgroundColor = UIColor.clear.cgColor
             self.categoryDescription.layer.backgroundColor = UIColor.clear.cgColor
         }
@@ -72,6 +73,7 @@ class CategoryCell: UITableViewCell {
         
         categoryName.text = ""
         categoryDescription.text = ""
+        moreInfoImgView.isHidden = true
         
         setImageViewLoading()
     }
