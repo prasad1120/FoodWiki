@@ -37,7 +37,9 @@ class NetworkService {
             
             do {
                 let categoryApiResponse = try JSONDecoder().decode(CategoryAPIResponse.self, from: data)
-                completion(categoryApiResponse)
+                DispatchQueue.main.async {
+                    completion(categoryApiResponse)
+                }
             } catch {
                 print(error)
             }
@@ -71,7 +73,9 @@ class NetworkService {
             
             do {
                 let mealsFilterByCategoryAPIResponse = try JSONDecoder().decode(MealsFilterByCategoryAPIResponse.self, from: data)
-                completion(mealsFilterByCategoryAPIResponse)
+                DispatchQueue.main.async {
+                    completion(mealsFilterByCategoryAPIResponse)
+                }
             } catch {
                 print(error)
             }
@@ -100,7 +104,9 @@ class NetworkService {
                 return
             }
             
-            completion(UIImage(data: data)!)
+            DispatchQueue.main.async {
+                completion(UIImage(data: data)!)
+            }
         }.resume()
     }
 }

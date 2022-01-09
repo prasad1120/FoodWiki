@@ -44,11 +44,8 @@ class CategoriesTableVC: UITableViewController {
         cell.delegate = self
         
         let categoryObj = DataService.shared.getCategoryData(at: indexPath.section) { category in
-            DispatchQueue.main.async {
-                cell.setCategoryData(categoryData: category)
-                tableView.reloadData()
-                
-            }
+            cell.setCategoryData(categoryData: category)
+            tableView.reloadData()
         }
         
         if let categoryObj = categoryObj {
@@ -59,9 +56,7 @@ class CategoriesTableVC: UITableViewController {
         
         
         let categoryThumb = DataService.shared.getImage(at: indexPath.section, { downloadedImg in
-            DispatchQueue.main.async {
-                cell.setImage(img: downloadedImg)
-            }
+            cell.setImage(img: downloadedImg)
         })
         
         if let categoryThumb = categoryThumb {
@@ -106,10 +101,8 @@ extension CategoriesTableVC: UITableViewDataSourcePrefetching {
         
         for indexPath in indexPaths {
             
-            _ = DataService.shared.getImage(at: indexPath.section, { downloadedImg in
-                DispatchQueue.main.async {
-                    self.tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
-                }
+            _ = DataService.shared.getImage(at: indexPath.section, { _ in
+                self.tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
             })
         }
     }

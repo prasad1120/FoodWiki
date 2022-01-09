@@ -21,7 +21,7 @@ class MealsTableVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // tableView.prefetchDataSource = self
+        tableView.prefetchDataSource = self
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,10 +53,8 @@ class MealsTableVC: UITableViewController {
         // cell.delegate = self
         
         let mealInfoObj = DataService.shared.getMealInfoData(at: indexPath.section, categoryName: categoryName) { mealInfo in
-            DispatchQueue.main.async {
-                cell.setMealInfo(mealInfo: mealInfo)
-                tableView.reloadData()
-            }
+            cell.setMealInfo(mealInfo: mealInfo)
+            tableView.reloadData()
         }
         
         if let mealInfoObj = mealInfoObj {
@@ -66,17 +64,15 @@ class MealsTableVC: UITableViewController {
         }
         
         
-//        let categoryThumb = DataService.shared.getImage(at: indexPath.section, { downloadedImg in
-//            DispatchQueue.main.async {
-//                cell.setImage(img: downloadedImg)
-//            }
-//        })
-//
-//        if let categoryThumb = categoryThumb {
-//            cell.setImage(img: categoryThumb)
-//        } else {
-//            cell.setImageViewLoading()
-//        }
+        let mealThumb = DataService.shared.getImage(at: indexPath.section, categoryName: categoryName, { downloadedImg in
+            cell.setImage(img: downloadedImg)
+        })
+
+        if let mealThumb = mealThumb {
+            cell.setImage(img: mealThumb)
+        } else {
+            cell.setImageViewLoading()
+        }
         
         return cell
     }
@@ -104,23 +100,21 @@ class MealsTableVC: UITableViewController {
 }
 
 
-//extension CategoriesTableVC: UITableViewDataSourcePrefetching {
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//
-//        for indexPath in indexPaths {
-//
-//            _ = DataService.shared.getImage(at: indexPath.section, { downloadedImg in
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
-//                }
-//            })
-//        }
-//    }
+extension MealsTableVC: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+
+        for indexPath in indexPaths {
+
+            _ = DataService.shared.getImage(at: indexPath.section, categoryName: categoryName, { _ in
+                self.tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
+            })
+        }
+    }
 
 //    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
 //        <#code#>
 //    }
-// }
+}
 
 
 //extension MealsTableVC: CategoryCellProtocol {

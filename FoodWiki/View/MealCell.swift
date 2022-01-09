@@ -19,7 +19,7 @@ class MealCell: UITableViewCell {
     }
     
     func setImage(img: UIImage) {
-        let temp = UIImage.scale(img: img, scale: 1.5)
+        let temp = UIImage.scale(img: img, scale: 1)
         UIView.animate(withDuration: animationTime) {
             
             self.thumbImgView.backgroundColor = UIColor.systemFill

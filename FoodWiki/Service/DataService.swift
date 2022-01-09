@@ -14,8 +14,10 @@ class DataService {
     static let shared = DataService()
     
     var isCategoriesAPICalled = false
-    var isCategoriesImageAPICalled: [Int: Bool] = [:]
+    var isCategoriesImgAPICalled: [Int: Bool] = [:]
     var isMealInfoAPICalled: [String: Bool] = [:]
+    var isMealInfoImgAPICalled: [String: [Int: Bool]] = [:]
+    
     var categories: [Category]?
     var mealsInfo: [String: [MealInfo]] = [:]
     
@@ -24,13 +26,33 @@ class DataService {
         guard let imgData = categories?[index].imageData else {
             
             if let url = categories?[index].imgUrl,
-                isCategoriesImageAPICalled[index] != true {
+                isCategoriesImgAPICalled[index] != true {
                 
                 NetworkService.shared.downloadImg(index: index, imgUrl: url) { downloadedImg in
                     self.categories?[index].imageData = downloadedImg
                     completion?(downloadedImg)
                 }
-                isCategoriesImageAPICalled[index] = true
+                isCategoriesImgAPICalled[index] = true
+            }
+            
+            return nil
+        }
+        
+        return imgData
+    }
+    
+    func getImage(at index: Int, categoryName: String, _ completion: ((_ img: UIImage) -> Void)?) -> UIImage? {
+        
+        guard let imgData = mealsInfo[categoryName]?[index].imageData else {
+            
+            if let url = mealsInfo[categoryName]?[index].imgUrl,
+                isMealInfoImgAPICalled[categoryName]?[index] != true {
+                
+                NetworkService.shared.downloadImg(index: index, imgUrl: url) { downloadedImg in
+                    self.mealsInfo[categoryName]?[index].imageData = downloadedImg
+                    completion?(downloadedImg)
+                }
+                isMealInfoImgAPICalled[categoryName]?[index] = true
             }
             
             return nil
