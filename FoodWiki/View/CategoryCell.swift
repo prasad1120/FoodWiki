@@ -16,14 +16,14 @@ class CategoryCell: UITableViewCell {
     let animationTime = 0.25
     
     func setImageViewLoading() {
-        thumbImgView.backgroundColor = #colorLiteral(red: 0.6225500107, green: 0.6225500107, blue: 0.6225500107, alpha: 1)
+        thumbImgView.backgroundColor = UIColor.systemFill
     }
     
     func setImage(img: UIImage) {
         let temp = UIImage.scale(img: img, scale: 1.5)
         UIView.animate(withDuration: animationTime) {
             
-            self.thumbImgView.backgroundColor = UIColor.clear
+            self.thumbImgView.backgroundColor = UIColor.systemFill
         }
         UIView.transition(with: thumbImgView,
                           duration: animationTime,
@@ -54,8 +54,8 @@ class CategoryCell: UITableViewCell {
     }
     
     func setCategoryUILoading() {
-        categoryName.layer.backgroundColor = #colorLiteral(red: 0.9000000358, green: 0.9000000358, blue: 0.9000000358, alpha: 1).cgColor
-        categoryDescription.layer.backgroundColor = #colorLiteral(red: 0.9000000358, green: 0.9000000358, blue: 0.9000000358, alpha: 1).cgColor
+        categoryName.layer.backgroundColor = UIColor.systemGray5.cgColor
+        categoryDescription.layer.backgroundColor = UIColor.systemGray5.cgColor
         
         categoryName.text = ""
         categoryDescription.text = ""
