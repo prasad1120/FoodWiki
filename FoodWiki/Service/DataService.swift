@@ -36,8 +36,8 @@ class DataService {
         
         guard let _ = categories else {
             NetworkService.shared.downloadCategories { categoryAPIResponse in
-                self.categories = categoryAPIResponse.categories
-                completion(categoryAPIResponse.categories[index])
+                self.categories = categoryAPIResponse.categories.sorted(by: { $0.strCategory < $1.strCategory })
+                completion(self.categories![index])
             }
             
             return nil
