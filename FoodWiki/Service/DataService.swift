@@ -13,6 +13,9 @@ class DataService {
     private init() { }
     static let shared = DataService()
     
+    var isCategoriesAPICalled = false
+    var isCategoriesImageAPICalled: [Int: Bool] = [:]
+    var isMealInfoAPICalled: [String: Bool] = [:]
     var categories: [Category]?
     var mealsInfo: [String: [MealInfo]] = [:]
     
@@ -20,11 +23,14 @@ class DataService {
         
         guard let imgData = categories?[index].imageData else {
             
-            if let url = categories?[index].imgUrl {
+            if let url = categories?[index].imgUrl,
+                isCategoriesImageAPICalled[index] != true {
+                
                 NetworkService.shared.downloadImg(index: index, imgUrl: url) { downloadedImg in
                     self.categories?[index].imageData = downloadedImg
                     completion?(downloadedImg)
                 }
+                isCategoriesImageAPICalled[index] = true
             }
             
             return nil
@@ -36,9 +42,13 @@ class DataService {
     func getCategoryData(at index: Int, _ completion: @escaping (_ category: Category) -> Void) -> Category? {
         
         guard let _ = categories else {
-            NetworkService.shared.downloadCategories { categoryAPIResponse in
-                self.categories = categoryAPIResponse.categories.sorted(by: { $0.name < $1.name })
-                completion(self.categories![index])
+            
+            if isCategoriesAPICalled == false {
+                NetworkService.shared.downloadCategories { categoryAPIResponse in
+                    self.categories = categoryAPIResponse.categories.sorted(by: { $0.name < $1.name })
+                    completion(self.categories![index])
+                }
+                isCategoriesAPICalled = true
             }
             
             return nil
@@ -52,9 +62,14 @@ class DataService {
         
         guard let _ = mealsInfo[categoryName] else {
             
-            NetworkService.shared.downloadMeals(for: categoryName) { mealsFilterByCategoryAPIResponse in
-                self.mealsInfo[categoryName] = mealsFilterByCategoryAPIResponse.meals.sorted(by: { $0.name < $1.name })
-                completion(self.mealsInfo[categoryName]![index])
+            if isMealInfoAPICalled[categoryName] != true {
+                
+                NetworkService.shared.downloadMeals(for: categoryName) { mealsFilterByCategoryAPIResponse in
+                    self.mealsInfo[categoryName] = mealsFilterByCategoryAPIResponse.meals.sorted(by: { $0.name < $1.name })
+                    completion(self.mealsInfo[categoryName]![index])
+                }
+                
+                isMealInfoAPICalled[categoryName] = true
             }
             
             return nil
