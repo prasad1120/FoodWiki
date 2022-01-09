@@ -12,6 +12,7 @@ class CategoriesTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.prefetchDataSource = self
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -31,9 +32,9 @@ class CategoriesTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            let headerView = UIView()
-            headerView.backgroundColor = UIColor.clear
-            return headerView
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
     }
     
     
@@ -72,14 +73,25 @@ class CategoriesTableVC: UITableViewController {
         return cell
     }
     
-    func showCategoryDetails(at index: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let categoryDetailsVC = storyboard.instantiateViewController(identifier: "CategoryDetailsVC") as! CategoryDetailsVC
-        categoryDetailsVC.setData(category: DataService.shared.categories![index.section])
-        categoryDetailsVC.modalPresentationStyle = .automatic
-        categoryDetailsVC.modalTransitionStyle = .coverVertical
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let categoryDetailsVC = storyboard.instantiateViewController(identifier: "CategoryDetailsVC") as! CategoryDetailsVC
+//
+//        self.navigationController?.pushViewController(categoryDetailsVC, animated: true)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueIdentifier = segue.identifier {
+            if segueIdentifier == "ShowCategoryDetailSegue",
+               let categoryDetailsVC = segue.destination as? CategoryDetailsVC {
                 
-        present(categoryDetailsVC, animated: true, completion: nil)
+                if let index = sender as? IndexPath {
+                    categoryDetailsVC.setData(category: DataService.shared.categories![index.section])
+                }
+            }
+        }
     }
 }
 
@@ -109,6 +121,6 @@ extension CategoriesTableVC: CategoryCellProtocol {
             return
         }
         
-        showCategoryDetails(at: indexPath)
+        performSegue(withIdentifier: "ShowCategoryDetailSegue", sender: indexPath)
     }
 }
