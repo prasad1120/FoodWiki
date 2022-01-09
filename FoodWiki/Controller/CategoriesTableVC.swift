@@ -1,5 +1,5 @@
 //
-//  MealsTableVC.swift
+//  CategoriesTableVC.swift
 //  FoodWiki
 //
 //  Created by Prasad Shinde on 1/4/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MealsTableVC: UITableViewController {
+class CategoriesTableVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +84,7 @@ class MealsTableVC: UITableViewController {
 }
 
 
-extension MealsTableVC: UITableViewDataSourcePrefetching {
+extension CategoriesTableVC: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
         for indexPath in indexPaths {
@@ -103,7 +103,7 @@ extension MealsTableVC: UITableViewDataSourcePrefetching {
 }
 
 
-extension MealsTableVC: CategoryCellProtocol {
+extension CategoriesTableVC: CategoryCellProtocol {
     func moreInfoTapped(cell: CategoryCell) {
         guard let indexPath = tableView.indexPath(for: cell) else {
             return
