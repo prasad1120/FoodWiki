@@ -40,6 +40,7 @@ class MealsTableVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+        cell.delegate = self
         
         let categoryObj = DataService.shared.getCategoryData(at: indexPath.section) { category in
             DispatchQueue.main.async {
@@ -70,6 +71,16 @@ class MealsTableVC: UITableViewController {
         
         return cell
     }
+    
+    func showCategoryDetails(at index: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let categoryDetailsVC = storyboard.instantiateViewController(identifier: "CategoryDetailsVC") as! CategoryDetailsVC
+        categoryDetailsVC.setData(category: DataService.shared.categories![index.section])
+        categoryDetailsVC.modalPresentationStyle = .popover
+        categoryDetailsVC.modalTransitionStyle = .coverVertical
+                
+        present(categoryDetailsVC, animated: true, completion: nil)
+    }
 }
 
 
@@ -91,3 +102,13 @@ extension MealsTableVC: UITableViewDataSourcePrefetching {
 //    }
 }
 
+
+extension MealsTableVC: CategoryCellProtocol {
+    func moreInfoTapped(cell: CategoryCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        showCategoryDetails(at: indexPath)
+    }
+}

@@ -12,8 +12,21 @@ class CategoryCell: UITableViewCell {
     @IBOutlet weak var thumbImgView: UIImageView!
     @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var categoryDescription: UILabel!
+    @IBOutlet weak var moreInfoImgView: UIImageView!
     
     let animationTime = 0.25
+    var delegate: CategoryCellProtocol?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(moreInfoTapDetected))
+        moreInfoImgView.isUserInteractionEnabled = true
+        moreInfoImgView.addGestureRecognizer(singleTap)
+    }
+    
+    @objc func moreInfoTapDetected() {
+        delegate?.moreInfoTapped(cell: self)
+    }
     
     func setImageViewLoading() {
         thumbImgView.backgroundColor = UIColor.systemFill
@@ -62,5 +75,10 @@ class CategoryCell: UITableViewCell {
         
         setImageViewLoading()
     }
+}
+
+
+protocol CategoryCellProtocol {
+    func moreInfoTapped(cell: CategoryCell)
 }
 

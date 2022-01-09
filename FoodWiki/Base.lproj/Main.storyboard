@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +29,7 @@
                                             <color key="backgroundColor" systemColor="systemFillColor"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FoodWiki" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYF-oC-jWU">
-                                            <rect key="frame" x="20" y="226" width="334" height="30"/>
+                                            <rect key="frame" x="20" y="226" width="301" height="30"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -39,13 +40,22 @@
                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="KV8-Cg-m52">
+                                            <rect key="frame" x="329" y="229" width="25" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="Fzp-Xv-maG"/>
+                                                <constraint firstAttribute="height" constant="25" id="WTh-q6-c2F"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Ie5-Oc-O1r" secondAttribute="trailing" id="7KG-MC-RHj"/>
+                                        <constraint firstItem="KV8-Cg-m52" firstAttribute="leading" secondItem="jYF-oC-jWU" secondAttribute="trailing" constant="8" id="0HR-yR-ujr"/>
+                                        <constraint firstItem="KV8-Cg-m52" firstAttribute="centerY" secondItem="jYF-oC-jWU" secondAttribute="centerY" id="7GI-ut-Bee"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Ie5-Oc-O1r" secondAttribute="trailing" id="7dT-aL-maG"/>
                                         <constraint firstItem="Xld-8c-xtl" firstAttribute="top" secondItem="r1L-Ja-ywa" secondAttribute="top" id="AXu-ox-Lmz"/>
                                         <constraint firstItem="jYF-oC-jWU" firstAttribute="height" secondItem="r1L-Ja-ywa" secondAttribute="height" multiplier="0.1" id="Nev-6k-QGb"/>
                                         <constraint firstItem="Ie5-Oc-O1r" firstAttribute="top" secondItem="jYF-oC-jWU" secondAttribute="bottom" constant="2" id="REJ-Sj-Ak1"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="jYF-oC-jWU" secondAttribute="trailing" id="RIw-rV-gfC"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="KV8-Cg-m52" secondAttribute="trailing" id="ZAg-Wf-HIy"/>
                                         <constraint firstItem="Xld-8c-xtl" firstAttribute="leading" secondItem="r1L-Ja-ywa" secondAttribute="leading" id="d5G-VV-0tH"/>
                                         <constraint firstItem="Ie5-Oc-O1r" firstAttribute="leading" secondItem="r1L-Ja-ywa" secondAttribute="leadingMargin" id="gWa-cA-cIK"/>
                                         <constraint firstAttribute="trailing" secondItem="Xld-8c-xtl" secondAttribute="trailing" id="h4g-pS-BQb"/>
@@ -59,6 +69,7 @@
                                 <connections>
                                     <outlet property="categoryDescription" destination="Ie5-Oc-O1r" id="zFb-a8-a7m"/>
                                     <outlet property="categoryName" destination="jYF-oC-jWU" id="Ywu-Zj-GlH"/>
+                                    <outlet property="moreInfoImgView" destination="KV8-Cg-m52" id="IH3-xh-hx7"/>
                                     <outlet property="thumbImgView" destination="Xld-8c-xtl" id="if4-E4-I0a"/>
                                 </connections>
                             </tableViewCell>
@@ -73,12 +84,92 @@
             </objects>
             <point key="canvasLocation" x="366.66666666666669" y="122.54464285714285"/>
         </scene>
+        <!--Category DetailsVC-->
+        <scene sceneID="USm-Be-AAb">
+            <objects>
+                <viewController storyboardIdentifier="CategoryDetailsVC" id="wXb-iL-Kwo" customClass="CategoryDetailsVC" customModule="FoodWiki" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mGj-2N-TeH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0K-Kc-z4s">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGi-mR-rui">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1151"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gFU-Ue-TsT">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="286.5"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dessert" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJ9-gF-RsI">
+                                                <rect key="frame" x="8" y="306.5" width="398" height="34.5"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZv-es-0UL">
+                                                <rect key="frame" x="8" y="361" width="398" height="790"/>
+                                                <mutableString key="text">Dessert is a course that concludes a meal. The course usually consists of sweet foods, such as confections dishes or fruit, and possibly a beverage such as dessert wine or liqueur, however in the United States it may include coffee, cheeses, nuts, or other savory items regarded as a separate course elsewhere. In some parts of the world, such as much of central and western Africa, and most parts of China, there is no tradition of a dessert course to conclude a meal.\r\n\r\nThe term dessert can apply to many confections, such as biscuits, cakes, cookies, custards, gelatins, ice creams, pastries, pies, puddings, and sweet soups, and tarts. Fruit is also commonly found in dessert courses because of its naturally occurring sweetness. Some cultures sweeten foods that are more commonly savory to create desserts.Dessert is a course that concludes a meal. The course usually consists of sweet foods, such as confections dishes or fruit, and possibly a beverage such as dessert wine or liqueur, however in the United States it may include coffee, cheeses, nuts, or other savory items regarded as a separate course elsewhere. In some parts of the world, such as much of central and western Africa, and most parts of China, there is no tradition of a dessert course to conclude a meal.\r\n\r\nThe term dessert can apply to many confections, such as biscuits, cakes, cookies, custards, gelatins, ice creams, pastries, pies, puddings, and sweet soups, and tarts. Fruit is also commonly found in dessert courses because of its naturally occurring sweetness. Some cultures sweeten foods that are more commonly savory to create desserts.</mutableString>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="oJ9-gF-RsI" secondAttribute="trailing" id="3EO-j3-ZYw"/>
+                                            <constraint firstItem="gFU-Ue-TsT" firstAttribute="leading" secondItem="XGi-mR-rui" secondAttribute="leading" id="JQS-u5-Yr0"/>
+                                            <constraint firstAttribute="bottom" secondItem="tZv-es-0UL" secondAttribute="bottom" id="Oe6-hc-8jZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="gFU-Ue-TsT" secondAttribute="trailing" id="QDy-f5-VRf"/>
+                                            <constraint firstItem="gFU-Ue-TsT" firstAttribute="top" secondItem="XGi-mR-rui" secondAttribute="top" id="YXV-Md-LM8"/>
+                                            <constraint firstItem="oJ9-gF-RsI" firstAttribute="top" secondItem="gFU-Ue-TsT" secondAttribute="bottom" constant="20" id="bp6-Q5-8ng"/>
+                                            <constraint firstItem="oJ9-gF-RsI" firstAttribute="leading" secondItem="XGi-mR-rui" secondAttribute="leadingMargin" id="h7U-TI-qIn"/>
+                                            <constraint firstItem="tZv-es-0UL" firstAttribute="top" secondItem="oJ9-gF-RsI" secondAttribute="bottom" constant="20" id="tde-Y7-MjC"/>
+                                            <constraint firstItem="tZv-es-0UL" firstAttribute="leading" secondItem="XGi-mR-rui" secondAttribute="leadingMargin" id="wtD-eD-cCw"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="tZv-es-0UL" secondAttribute="trailing" id="zZ3-tu-6rB"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="XGi-mR-rui" firstAttribute="bottom" secondItem="sfk-Aa-l3I" secondAttribute="bottom" id="4bP-go-E7A"/>
+                                    <constraint firstItem="XGi-mR-rui" firstAttribute="top" secondItem="sfk-Aa-l3I" secondAttribute="top" id="Cob-dz-bmW"/>
+                                    <constraint firstItem="XGi-mR-rui" firstAttribute="width" secondItem="XTk-1e-2SO" secondAttribute="width" id="PmB-ip-1JY"/>
+                                    <constraint firstItem="XGi-mR-rui" firstAttribute="trailing" secondItem="sfk-Aa-l3I" secondAttribute="trailing" id="S8x-rO-XZC"/>
+                                    <constraint firstItem="XGi-mR-rui" firstAttribute="leading" secondItem="sfk-Aa-l3I" secondAttribute="leading" id="gTQ-QW-lv5"/>
+                                    <constraint firstItem="gFU-Ue-TsT" firstAttribute="height" secondItem="XTk-1e-2SO" secondAttribute="height" multiplier="0.35" id="q5Q-wq-0Cq"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="sfk-Aa-l3I"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="XTk-1e-2SO"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7Td-Yk-kfe"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7Td-Yk-kfe" firstAttribute="bottom" secondItem="D0K-Kc-z4s" secondAttribute="bottom" id="2v4-Nr-PHy"/>
+                            <constraint firstItem="D0K-Kc-z4s" firstAttribute="top" secondItem="7Td-Yk-kfe" secondAttribute="top" id="HDe-ZM-cPX"/>
+                            <constraint firstItem="D0K-Kc-z4s" firstAttribute="leading" secondItem="7Td-Yk-kfe" secondAttribute="leading" id="K6P-C6-mIW"/>
+                            <constraint firstItem="7Td-Yk-kfe" firstAttribute="trailing" secondItem="D0K-Kc-z4s" secondAttribute="trailing" id="iqF-QQ-JkQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="categoryDescriptionLbl" destination="tZv-es-0UL" id="YXn-wT-0os"/>
+                        <outlet property="categoryImgView" destination="gFU-Ue-TsT" id="lFo-2h-5fU"/>
+                        <outlet property="categoryNameLbl" destination="oJ9-gF-RsI" id="4j1-l4-uEI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MFf-Q2-gK6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1594.2028985507247" y="130.58035714285714"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemFillColor">

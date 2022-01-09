@@ -21,6 +21,7 @@
 		39D6F66B278563B80096B1B7 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F66A278563B80096B1B7 /* Category.swift */; };
 		39D6F66D2785722D0096B1B7 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D6F66C2785722C0096B1B7 /* DataService.swift */; };
 		39FB038927893EE0006EF328 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FB038827893EE0006EF328 /* Utilities.swift */; };
+		39FB038B278A8307006EF328 /* CategoryDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FB038A278A8307006EF328 /* CategoryDetailsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		39D6F66A278563B80096B1B7 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		39D6F66C2785722C0096B1B7 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		39FB038827893EE0006EF328 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		39FB038A278A8307006EF328 /* CategoryDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				39D6F63827853E170096B1B7 /* MealsTableVC.swift */,
+				39FB038A278A8307006EF328 /* CategoryDetailsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39D6F63927853E170096B1B7 /* MealsTableVC.swift in Sources */,
+				39FB038B278A8307006EF328 /* CategoryDetailsVC.swift in Sources */,
 				39D6F66B278563B80096B1B7 /* Category.swift in Sources */,
 				39D6F63527853E170096B1B7 /* AppDelegate.swift in Sources */,
 				395A94AF27880CEF0016DA3C /* CategoryCell.swift in Sources */,
