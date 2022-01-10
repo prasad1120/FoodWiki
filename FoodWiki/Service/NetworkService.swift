@@ -13,7 +13,9 @@ class NetworkService {
     
     
     private let categoriesUrl: URL! = URL(string: "https://www.themealdb.com/api/json/v1/1/categories.php")
-    private let mealsUrl: URL! = URL(string: "https://www.themealdb.com/api/json/v1/1/filter.php")
+    private let mealsInfo: URL! = URL(string: "https://www.themealdb.com/api/json/v1/1/filter.php")
+    private let mealDetails: URL! = URL(string: "https://www.themealdb.com/api/json/v1/1/lookup.php")
+    
     
     
     func downloadCategories(_ completion: @escaping (_ categoryAPIResponse: CategoryAPIResponse) -> Void) {
@@ -52,7 +54,7 @@ class NetworkService {
         
         var components = URLComponents()
         components.queryItems = [URLQueryItem(name: "c", value: categoryName)]
-        let finalMealsUrl = URL(string: mealsUrl.absoluteString + components.url!.absoluteString)!
+        let finalMealsUrl = URL(string: mealsInfo.absoluteString + components.url!.absoluteString)!
         
         URLSession.shared.dataTask(with: finalMealsUrl) { data, response, error in
             if let error = error {
@@ -75,6 +77,45 @@ class NetworkService {
                 let mealsFilterByCategoryAPIResponse = try JSONDecoder().decode(MealsFilterByCategoryAPIResponse.self, from: data)
                 DispatchQueue.main.async {
                     completion(mealsFilterByCategoryAPIResponse)
+                }
+            } catch {
+                print(error)
+            }
+        }.resume()
+        
+    }
+    
+    
+    func downloadMealDetails(id: String, _ completion: @escaping (_ mealByIDAPIResponse: MealByIDAPIResponse) -> Void) {
+        
+        var components = URLComponents()
+        components.queryItems = [URLQueryItem(name: "i", value: id)]
+        let finalMealDetailsUrl = URL(string: mealDetails.absoluteString + components.url!.absoluteString)!
+        
+        URLSession.shared.dataTask(with: finalMealDetailsUrl) { data, response, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                      
+                      print("Error with the response, unexpected status code: \(String(describing: response))")
+                      return
+            }
+            
+            
+            guard let data = data else {
+                return
+            }
+            
+            print(String(data: data, encoding: .utf8) as Any)
+            
+            do {
+                let mealByIDAPIResponse = try JSONDecoder().decode(MealByIDAPIResponse.self, from: data)
+                DispatchQueue.main.async {
+                    completion(mealByIDAPIResponse)
                 }
             } catch {
                 print(error)
@@ -118,4 +159,8 @@ struct CategoryAPIResponse: Codable {
 
 struct MealsFilterByCategoryAPIResponse: Codable {
     var meals: [MealInfo]
+}
+
+struct MealByIDAPIResponse: Decodable {
+    var meals: [MealDetails]
 }

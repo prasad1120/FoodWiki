@@ -76,25 +76,22 @@ class MealsTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let categoryDetailsVC = storyboard.instantiateViewController(identifier: "CategoryDetailsVC") as! CategoryDetailsVC
-//
-//        self.navigationController?.pushViewController(categoryDetailsVC, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "ShowMealDetail", sender: indexPath)
     }
     
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let segueIdentifier = segue.identifier {
-//            if segueIdentifier == "ShowCategoryDetailSegue",
-//               let categoryDetailsVC = segue.destination as? CategoryDetailsVC {
-//
-//                if let index = sender as? IndexPath {
-//                    categoryDetailsVC.setData(category: DataService.shared.categories![index.section])
-//                }
-//            }
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let segueIdentifier = segue.identifier {
+            if segueIdentifier == "ShowMealDetail",
+               let mealDetailsVC = segue.destination as? MealDetailsVC {
+
+                if let index = sender as? IndexPath {
+                    mealDetailsVC.setData(id: DataService.shared.mealsInfo[categoryName]![index.section].id, indexInTable: index.section, categoryName: categoryName)
+                }
+            }
+        }
+    }
 }
 
 

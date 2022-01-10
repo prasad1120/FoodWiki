@@ -17,9 +17,11 @@ class DataService {
     var isCategoriesImgAPICalled: [Int: Bool] = [:]
     var isMealInfoAPICalled: [String: Bool] = [:]
     var isMealInfoImgAPICalled: [String: [Int: Bool]] = [:]
+    var isMealDetailsAPICalled: [String: Bool] = [:]
     
     var categories: [Category]?
     var mealsInfo: [String: [MealInfo]] = [:]
+    var mealDetails: [String: MealDetails] = [:]
     
     func getImage(at index: Int, _ completion: ((_ img: UIImage) -> Void)?) -> UIImage? {
         
@@ -80,7 +82,7 @@ class DataService {
     }
     
     
-    func getMealInfoData(at index: Int, categoryName: String, _ completion: @escaping (_ mealInfo: MealInfo) -> Void) -> MealInfo? {
+    func getMealInfoData(at index: Int, categoryName: String, _ completion: ((_ mealInfo: MealInfo) -> Void)?) -> MealInfo? {
         
         guard let _ = mealsInfo[categoryName] else {
             
@@ -88,7 +90,7 @@ class DataService {
                 
                 NetworkService.shared.downloadMeals(for: categoryName) { mealsFilterByCategoryAPIResponse in
                     self.mealsInfo[categoryName] = mealsFilterByCategoryAPIResponse.meals.sorted(by: { $0.name < $1.name })
-                    completion(self.mealsInfo[categoryName]![index])
+                    completion?(self.mealsInfo[categoryName]![index])
                 }
                 
                 isMealInfoAPICalled[categoryName] = true
@@ -98,5 +100,25 @@ class DataService {
         }
         
         return mealsInfo[categoryName]![index]
+    }
+    
+    
+    func getMealDetails(id: String, _ completion: @escaping (_ mealDetails: MealDetails) -> Void) -> MealDetails? {
+        
+        guard let _ = mealDetails[id] else {
+            if isMealDetailsAPICalled[id] != true {
+                
+                NetworkService.shared.downloadMealDetails(id: id) { mealByIDAPIResponse in
+                    self.mealDetails[id] = mealByIDAPIResponse.meals.first
+                    completion(self.mealDetails[id]!)
+                }
+                
+                isMealDetailsAPICalled[id] = true
+            }
+            
+            return nil
+        }
+        
+        return mealDetails[id]
     }
 }
