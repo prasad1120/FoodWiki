@@ -50,11 +50,16 @@ class DataService {
             if let url = mealsInfo[categoryName]?[index].imgUrl,
                 isMealInfoImgAPICalled[categoryName]?[index] != true {
                 
+                if isMealInfoImgAPICalled[categoryName] == nil {
+                    isMealInfoImgAPICalled[categoryName] = [:]
+                }
+                
+                isMealInfoImgAPICalled[categoryName]![index] = true
+                
                 NetworkService.shared.downloadImg(index: index, imgUrl: url) { downloadedImg in
                     self.mealsInfo[categoryName]?[index].imageData = downloadedImg
                     completion?(downloadedImg)
                 }
-                isMealInfoImgAPICalled[categoryName]?[index] = true
             }
             
             return nil
