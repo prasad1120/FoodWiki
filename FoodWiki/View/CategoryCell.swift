@@ -10,8 +10,8 @@ import UIKit
 class CategoryCell: UITableViewCell {
     
     @IBOutlet weak var thumbImgView: UIImageView!
-    @IBOutlet weak var categoryName: UILabel!
-    @IBOutlet weak var categoryDescription: UILabel!
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var moreInfoImgView: UIImageView!
     
     let animationTime = 0.25
@@ -50,29 +50,29 @@ class CategoryCell: UITableViewCell {
         UIView.animate(withDuration: animationTime) {
             
             self.moreInfoImgView.isHidden = false
-            self.categoryName.layer.backgroundColor = UIColor.clear.cgColor
-            self.categoryDescription.layer.backgroundColor = UIColor.clear.cgColor
+            self.nameLbl.layer.backgroundColor = UIColor.clear.cgColor
+            self.descriptionLbl.layer.backgroundColor = UIColor.clear.cgColor
         }
         
-        UIView.transition(with: categoryName,
+        UIView.transition(with: nameLbl,
                           duration: animationTime,
                           options: .transitionCrossDissolve,
-                          animations: { [weak self] in self?.categoryName.text = categoryData.name },
+                          animations: { [weak self] in self?.nameLbl.text = categoryData.name },
                           completion: nil)
         
-        UIView.transition(with: categoryDescription,
+        UIView.transition(with: descriptionLbl,
                           duration: animationTime,
                           options: .transitionCrossDissolve,
-                          animations: { [weak self] in self?.categoryDescription.text = categoryData.description},
+                          animations: { [weak self] in self?.descriptionLbl.text = categoryData.description},
                           completion: nil)
     }
     
     func setCategoryUILoading() {
-        categoryName.layer.backgroundColor = UIColor.systemGray5.cgColor
-        categoryDescription.layer.backgroundColor = UIColor.systemGray5.cgColor
+        nameLbl.layer.backgroundColor = UIColor.systemGray5.cgColor
+        descriptionLbl.layer.backgroundColor = UIColor.systemGray5.cgColor
         
-        categoryName.text = ""
-        categoryDescription.text = ""
+        nameLbl.text = ""
+        descriptionLbl.text = ""
         moreInfoImgView.isHidden = true
         
         setImageViewLoading()

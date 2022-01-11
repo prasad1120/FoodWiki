@@ -52,9 +52,3 @@ class MealCell: UITableViewCell {
         setImageViewLoading()
     }
 }
-
-
-//protocol CategoryCellProtocol {
-//    func moreInfoTapped(cell: CategoryCell)
-//}
-

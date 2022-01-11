@@ -7,7 +7,11 @@
 
 import UIKit
 
-class MealsTableVC: UITableViewController {
+class MealsTableVC: GenericFoodListTableVC {
+    
+    override var onCellClickSegueId: String! {
+        return "ShowMealDetail"
+    }
     
     var categoryName: String! {
         didSet {
@@ -31,21 +35,6 @@ class MealsTableVC: UITableViewController {
             return 1
         }
     }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(10)
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
-    }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 
@@ -75,12 +64,6 @@ class MealsTableVC: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "ShowMealDetail", sender: indexPath)
-    }
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let segueIdentifier = segue.identifier {
             if segueIdentifier == "ShowMealDetail",
@@ -105,19 +88,5 @@ extension MealsTableVC: UITableViewDataSourcePrefetching {
             })
         }
     }
-
-//    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-//        <#code#>
-//    }
 }
 
-
-//extension MealsTableVC: CategoryCellProtocol {
-//    func moreInfoTapped(cell: CategoryCell) {
-//        guard let indexPath = tableView.indexPath(for: cell) else {
-//            return
-//        }
-//
-//        performSegue(withIdentifier: "ShowCategoryDetailSegue", sender: indexPath)
-//    }
-//}

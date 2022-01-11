@@ -21,19 +21,8 @@ class NetworkService {
     func downloadCategories(_ completion: @escaping (_ categoryAPIResponse: CategoryAPIResponse) -> Void) {
         
         URLSession.shared.dataTask(with: categoriesUrl) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
             
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                      
-                      print("Error with the response, unexpected status code: \(String(describing: response))")
-                      return
-            }
-            
-            guard let data = data else {
+            guard let data = self.checkResponse(data: data, response: response, error: error) else {
                 return
             }
             
@@ -57,19 +46,8 @@ class NetworkService {
         let finalMealsUrl = URL(string: mealsInfo.absoluteString + components.url!.absoluteString)!
         
         URLSession.shared.dataTask(with: finalMealsUrl) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
             
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                      
-                      print("Error with the response, unexpected status code: \(String(describing: response))")
-                      return
-            }
-            
-            guard let data = data else {
+            guard let data = self.checkResponse(data: data, response: response, error: error) else {
                 return
             }
             
@@ -93,25 +71,11 @@ class NetworkService {
         let finalMealDetailsUrl = URL(string: mealDetails.absoluteString + components.url!.absoluteString)!
         
         URLSession.shared.dataTask(with: finalMealDetailsUrl) { data, response, error in
-            if let error = error {
-                print(error)
+            
+            guard let data = self.checkResponse(data: data, response: response, error: error) else {
                 return
             }
-            
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                      
-                      print("Error with the response, unexpected status code: \(String(describing: response))")
-                      return
-            }
-            
-            
-            guard let data = data else {
-                return
-            }
-            
-            print(String(data: data, encoding: .utf8) as Any)
-            
+                        
             do {
                 let mealByIDAPIResponse = try JSONDecoder().decode(MealByIDAPIResponse.self, from: data)
                 DispatchQueue.main.async {
@@ -129,19 +93,8 @@ class NetworkService {
     func downloadImg(index: Int, imgUrl: URL, _ completion: @escaping (_ img: UIImage) -> Void) {
         
         URLSession.shared.dataTask(with: imgUrl) { data, response, error in
-            if let error = error {
-                print(error)
-                return
-            }
             
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                      
-                      print("Error with the response, unexpected status code: \(String(describing: response))")
-                      return
-            }
-            
-            guard let data = data else {
+            guard let data = self.checkResponse(data: data, response: response, error: error) else {
                 return
             }
             
@@ -149,6 +102,23 @@ class NetworkService {
                 completion(UIImage(data: data)!)
             }
         }.resume()
+    }
+    
+    
+    func checkResponse(data: Data?, response: URLResponse?, error: Error?) -> Data? {
+        if let error = error {
+            print(error)
+            return nil
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+                  
+                  print("Error with the response, unexpected status code: \(String(describing: response))")
+                  return nil
+        }
+        
+        return data
     }
 }
 

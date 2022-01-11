@@ -55,7 +55,7 @@ class MealDetails: Decodable {
         drinkAlternate = MealDetails.getValue(container: values, key: "strDrinkAlternate")
         category = try values.decode(String.self, forKey: CodingKeys(stringValue: "strCategory")!)
         area = try values.decode(String.self, forKey: CodingKeys(stringValue: "strArea")!)
-        instructions = (try values.decode(String.self, forKey: CodingKeys(stringValue: "strInstructions")!)).replacingOccurrences(of: "/", with: "\\/")
+        instructions = (try values.decode(String.self, forKey: CodingKeys(stringValue: "strInstructions")!))
         imgUrl = URL(string: try! values.decode(String.self, forKey: CodingKeys(stringValue: "strMealThumb")!))!
         
         if let tagsValue = try? values.decode(String.self, forKey: CodingKeys(stringValue: "strTags")!) {
