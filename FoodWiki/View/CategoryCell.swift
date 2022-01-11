@@ -27,11 +27,13 @@ class CategoryCell: UITableViewCell {
         delegate?.moreInfoTapped(cell: self)
     }
     
+    /// Sets image to the thumbImgView with animation
     func setImage(img: UIImage) {
         UIView.animate(withDuration: animationTime) {
             
             self.thumbImgView.backgroundColor = UIColor.systemFill
         }
+        
         UIView.transition(with: thumbImgView,
                           duration: animationTime,
                           options: .transitionCrossDissolve,
@@ -39,6 +41,7 @@ class CategoryCell: UITableViewCell {
                           completion: nil)
     }
     
+    /// Sets category data to the CategoryCell UI with animation
     func setCategoryData(categoryData: Category) {
         UIView.animate(withDuration: animationTime) {
             
@@ -60,6 +63,7 @@ class CategoryCell: UITableViewCell {
                           completion: nil)
     }
     
+    /// Shows loading effect on the cell
     func setCategoryUILoading() {
         nameLbl.layer.backgroundColor = UIColor.systemGray5.cgColor
         descriptionLbl.layer.backgroundColor = UIColor.systemGray5.cgColor
@@ -71,7 +75,7 @@ class CategoryCell: UITableViewCell {
     }
 }
 
-
+/// Facilitates communication from CategoryCell to CategoriesTableVC
 protocol CategoryCellProtocol {
     func moreInfoTapped(cell: CategoryCell)
 }

@@ -18,7 +18,6 @@ class MealDetailsVC: UIViewController {
     @IBOutlet var ingredientsTableView: UITableView! {
         didSet {
             ingredientsTableView.dataSource = self
-            ingredientsTableView.delegate = self
         }
     }
     @IBOutlet weak var instructionsLbl: UILabel!
@@ -48,6 +47,8 @@ class MealDetailsVC: UIViewController {
     }
     
     override func viewDidLoad() {
+        
+        // Get mealDetails
         let mealDetailsObj = DataService.shared.getMealDetails(id: id) { mealDetails in
             
             self.mealDetails = mealDetails
@@ -59,12 +60,16 @@ class MealDetailsVC: UIViewController {
     }
     
     func setUI() {
+        
+        // Convert regular YT to link to embed link
         if let ytUrl = mealDetails?.ytUrl,
            let ytId = ytUrl.valueOf("v"),
            let ytUrl = URL(string: "https://www.youtube.com/embed/\(ytId)?playsinline=1") {
             
             ytPlayer.load(URLRequest(url: ytUrl))
         } else {
+            
+            // If link is not available, hide YT player and show meal thumb image instead
             ytPlayer.isHidden = true
             imgView.isHidden = false
             imgView.image = DataService.shared.getMealInfoData(at: indexInTable, categoryName: categoryName, nil)?.imageData
@@ -73,6 +78,7 @@ class MealDetailsVC: UIViewController {
         nameLbl.text = mealDetails?.name
         areaLbl.text = mealDetails?.area
         
+        // Convert array of tags to a single space separated string
         var tagsString = ""
         mealDetails?.tags?.forEach({ tag in
             tagsString.append(tag + " ")
@@ -80,11 +86,14 @@ class MealDetailsVC: UIViewController {
         
         tagsLbl.setAttributedString(textContent: tagsString)
         
+        // Reload ingredients table view since data is available
         ingredientsTableView.reloadData()
+        // Set new content height of table view to its height constraint to prevent scrolling
         ingredientsTVHeight.constant = ingredientsTableView.contentSize.height
         
         instructionsLbl.text = mealDetails?.instructions
         
+        // Show link icon if source url is available
         if let _ = mealDetails?.source {
             linkImgView.isHidden = false
         }
@@ -92,15 +101,12 @@ class MealDetailsVC: UIViewController {
     
     @objc func linkImgViewTapped() {
         if let url = mealDetails?.source {
+            // Open source url in Safari
             UIApplication.shared.open(url)
         }
     }
 }
 
-
-extension MealDetailsVC: UITableViewDelegate {
-    
-}
 
 extension MealDetailsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -7,17 +7,17 @@
 
 import UIKit
 
+/// Singleton class for performing network requests
 class NetworkService {
     private init() { }
     static let shared = NetworkService()
-    
     
     private let categoriesUrl: URL! = URL(string: "https://www.themealdb.com/api/json/v1/1/categories.php")
     private let mealsInfo: URL! = URL(string: "https://www.themealdb.com/api/json/v1/1/filter.php")
     private let mealDetails: URL! = URL(string: "https://www.themealdb.com/api/json/v1/1/lookup.php")
     
     
-    
+    /// Downloads categories data
     func downloadCategories(_ completion: @escaping (_ categoryAPIResponse: CategoryAPIResponse) -> Void) {
         
         URLSession.shared.dataTask(with: categoriesUrl) { data, response, error in
@@ -38,9 +38,10 @@ class NetworkService {
         }.resume()
     }
     
-    
+    /// Downloads meals info data
     func downloadMeals(for categoryName: String, _ completion: @escaping (_ mealsFilterByCategoryAPIResponse: MealsFilterByCategoryAPIResponse) -> Void) {
         
+        // Insert category name query param in the url
         var components = URLComponents()
         components.queryItems = [URLQueryItem(name: "c", value: categoryName)]
         let finalMealsUrl = URL(string: mealsInfo.absoluteString + components.url!.absoluteString)!
@@ -63,9 +64,10 @@ class NetworkService {
         
     }
     
-    
+    /// Downloads meals details
     func downloadMealDetails(id: String, _ completion: @escaping (_ mealByIDAPIResponse: MealByIDAPIResponse) -> Void) {
         
+        // Insert meal id query param in the url
         var components = URLComponents()
         components.queryItems = [URLQueryItem(name: "i", value: id)]
         let finalMealDetailsUrl = URL(string: mealDetails.absoluteString + components.url!.absoluteString)!
@@ -89,7 +91,7 @@ class NetworkService {
     }
     
     
-    
+    /// Downloads image from the passed URL
     func downloadImg(index: Int, imgUrl: URL, _ completion: @escaping (_ img: UIImage) -> Void) {
         
         URLSession.shared.dataTask(with: imgUrl) { data, response, error in
@@ -105,6 +107,7 @@ class NetworkService {
     }
     
     
+    /// Checks for errors and invalid http responses
     func checkResponse(data: Data?, response: URLResponse?, error: Error?) -> Data? {
         if let error = error {
             print(error)
@@ -122,15 +125,17 @@ class NetworkService {
     }
 }
 
-
+/// Model for categories data API response
 struct CategoryAPIResponse: Codable {
     var categories: [Category]
 }
 
+/// Model for meals info API response
 struct MealsFilterByCategoryAPIResponse: Codable {
     var meals: [MealInfo]
 }
 
+/// Model for meals details data API response
 struct MealByIDAPIResponse: Decodable {
     var meals: [MealDetails]
 }

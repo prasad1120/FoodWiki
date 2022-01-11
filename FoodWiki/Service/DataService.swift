@@ -8,12 +8,14 @@
 import Foundation
 import UIKit
 
-
+/// Singleton class for managing data
 class DataService {
     private init() { }
     static let shared = DataService()
     
     var isCategoriesAPICalled = false
+    
+    // Dictionaries to avoid making the same request calls again
     var isCategoriesImgAPICalled: [Int: Bool] = [:]
     var isMealInfoAPICalled: [String: Bool] = [:]
     var isMealInfoImgAPICalled: [String: [Int: Bool]] = [:]
@@ -23,7 +25,9 @@ class DataService {
     var mealsInfo: [String: [MealInfo]] = [:]
     var mealDetails: [String: MealDetails] = [:]
     
-    func getImage(at index: Int, _ completion: ((_ img: UIImage) -> Void)?) -> UIImage? {
+    
+    /// Returns saved category img if available, otherwise downloads it from NetworkService
+    func getCategoryImage(at index: Int, _ completion: ((_ img: UIImage) -> Void)?) -> UIImage? {
         
         guard let imgData = categories?[index].imageData else {
             
@@ -43,7 +47,9 @@ class DataService {
         return imgData
     }
     
-    func getImage(at index: Int, categoryName: String, _ completion: ((_ img: UIImage) -> Void)?) -> UIImage? {
+    
+    /// Returns saved meal img if available, otherwise downloads it from NetworkService
+    func getMealImage(at index: Int, categoryName: String, _ completion: ((_ img: UIImage) -> Void)?) -> UIImage? {
         
         guard let imgData = mealsInfo[categoryName]?[index].imageData else {
             
@@ -68,6 +74,8 @@ class DataService {
         return imgData
     }
     
+    
+    /// Returns saved category data if available, otherwise downloads it from NetworkService
     func getCategoryData(at index: Int, _ completion: @escaping (_ category: Category) -> Void) -> Category? {
         
         guard let _ = categories else {
@@ -87,6 +95,7 @@ class DataService {
     }
     
     
+    /// Returns saved meal info data if available, otherwise downloads it from NetworkService
     func getMealInfoData(at index: Int, categoryName: String, _ completion: ((_ mealInfo: MealInfo) -> Void)?) -> MealInfo? {
         
         guard let _ = mealsInfo[categoryName] else {
@@ -108,6 +117,7 @@ class DataService {
     }
     
     
+    /// Returns saved meal details data if available, otherwise downloads it from NetworkService
     func getMealDetails(id: String, _ completion: @escaping (_ mealDetails: MealDetails) -> Void) -> MealDetails? {
         
         guard let _ = mealDetails[id] else {

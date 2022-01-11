@@ -13,6 +13,7 @@ struct Category: Codable {
     var name: String
     var imgUrl: URL
     var description: String
+    /// UIImage at the URL specified by imgUrl
     var imageData: UIImage?
     
     private enum CodingKeys: String, CodingKey {

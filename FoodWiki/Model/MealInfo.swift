@@ -11,6 +11,7 @@ struct MealInfo: Codable {
     var id: String
     var name: String
     var imgUrl: URL
+    /// UIImage at the URL specified by imgUrl
     var imageData: UIImage?
     
     private enum CodingKeys: String, CodingKey {

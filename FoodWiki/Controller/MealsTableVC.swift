@@ -29,6 +29,7 @@ class MealsTableVC: GenericFoodListTableVC {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // Set no. of sections equal to no. of mealsInfo downloaded, otherwise set 1
         if let mealsInfo = DataService.shared.mealsInfo[categoryName] {
             return mealsInfo.count
         } else {
@@ -41,9 +42,11 @@ class MealsTableVC: GenericFoodListTableVC {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MealCell", for: indexPath) as! MealCell
         
         let mealInfoObj = DataService.shared.getMealInfoData(at: indexPath.section, categoryName: categoryName) { mealInfo in
+            // Reload table on downloading mealsInfo data
             tableView.reloadData()
         }
         
+        // If mealsInfo Data available then set it to UI otherwise set loading view
         if let mealInfoObj = mealInfoObj {
             cell.setMealInfo(mealInfo: mealInfoObj)
         } else {
@@ -51,10 +54,12 @@ class MealsTableVC: GenericFoodListTableVC {
         }
         
         
-        let mealThumb = DataService.shared.getImage(at: indexPath.section, categoryName: categoryName, { _ in
+        let mealThumb = DataService.shared.getMealImage(at: indexPath.section, categoryName: categoryName, { _ in
+            // Reload specific section on downloading meal thumb img
             tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
         })
 
+        // Set meal thumb image if available
         if let mealThumb = mealThumb {
             cell.setImage(img: mealThumb)
         }
@@ -64,6 +69,8 @@ class MealsTableVC: GenericFoodListTableVC {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let segueIdentifier = segue.identifier {
+            
+            // Segue to show Meal details VC
             if segueIdentifier == "ShowMealDetail",
                let mealDetailsVC = segue.destination as? MealDetailsVC {
 
@@ -77,11 +84,13 @@ class MealsTableVC: GenericFoodListTableVC {
 
 
 extension MealsTableVC: UITableViewDataSourcePrefetching {
+    
+    // Download mealInfo thumb images on demand basis
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
 
         for indexPath in indexPaths {
 
-            _ = DataService.shared.getImage(at: indexPath.section, categoryName: categoryName, { _ in
+            _ = DataService.shared.getMealImage(at: indexPath.section, categoryName: categoryName, { _ in
                 self.tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
             })
         }

@@ -20,6 +20,7 @@ class CategoriesTableVC: GenericFoodListTableVC {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // Set no. of sections equal to no. of categories downloaded, otherwise set 1
         if let categories = DataService.shared.categories {
             return categories.count
         } else {
@@ -33,19 +34,23 @@ class CategoriesTableVC: GenericFoodListTableVC {
         cell.delegate = self
         
         let categoryObj = DataService.shared.getCategoryData(at: indexPath.section) { category in
+            // Reload table on downloading categories data
             tableView.reloadData()
         }
         
+        // If category Data available then set it to UI otherwise set loading view
         if let categoryObj = categoryObj {
             cell.setCategoryData(categoryData: categoryObj)
         } else {
             cell.setCategoryUILoading()
         }
         
-        let categoryThumb = DataService.shared.getImage(at: indexPath.section, { _ in
+        let categoryThumb = DataService.shared.getCategoryImage(at: indexPath.section, { _ in
+            // Reload specific section on downloading category thumb img
             tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
         })
         
+        // Set category thumb image if available
         if let categoryThumb = categoryThumb {
             cell.setImage(img: categoryThumb)
         }
@@ -55,6 +60,8 @@ class CategoriesTableVC: GenericFoodListTableVC {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let segueIdentifier = segue.identifier {
+            
+            // Segue to show Category details VC
             if segueIdentifier == "ShowCategoryDetailSegue",
                let categoryDetailsVC = segue.destination as? CategoryDetailsVC {
                 
@@ -63,6 +70,7 @@ class CategoriesTableVC: GenericFoodListTableVC {
                 }
             }
             
+            // Segue to show Meals table VC
             if segueIdentifier == "ShowMealsSegue",
                let mealsTableVC = segue.destination as? MealsTableVC {
                 
@@ -76,11 +84,14 @@ class CategoriesTableVC: GenericFoodListTableVC {
 
 
 extension CategoriesTableVC: UITableViewDataSourcePrefetching {
+    
+    // Download category thumb images on demand basis
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
         for indexPath in indexPaths {
             
-            _ = DataService.shared.getImage(at: indexPath.section, { _ in
+            _ = DataService.shared.getCategoryImage(at: indexPath.section, { _ in
+                // Reload specific section on downloading category thumb img
                 self.tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .fade)
             })
         }
