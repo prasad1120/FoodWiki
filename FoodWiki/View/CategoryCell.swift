@@ -33,7 +33,6 @@ class CategoryCell: UITableViewCell {
     }
     
     func setImage(img: UIImage) {
-        let temp = UIImage.scale(img: img, scale: 1.5)
         UIView.animate(withDuration: animationTime) {
             
             self.thumbImgView.backgroundColor = UIColor.systemFill
@@ -41,7 +40,7 @@ class CategoryCell: UITableViewCell {
         UIView.transition(with: thumbImgView,
                           duration: animationTime,
                           options: .transitionCrossDissolve,
-                          animations: { [weak self] in self?.thumbImgView.image = temp },
+                          animations: { [weak self] in self?.thumbImgView.image = UIImage.scale(img: img, scale: 1.5) },
                           completion: nil)
     }
     

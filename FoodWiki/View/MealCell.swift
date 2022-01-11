@@ -19,7 +19,6 @@ class MealCell: UITableViewCell {
     }
     
     func setImage(img: UIImage) {
-        let temp = UIImage.scale(img: img, scale: 1)
         UIView.animate(withDuration: animationTime) {
             
             self.thumbImgView.backgroundColor = UIColor.systemFill
@@ -27,7 +26,7 @@ class MealCell: UITableViewCell {
         UIView.transition(with: thumbImgView,
                           duration: animationTime,
                           options: .transitionCrossDissolve,
-                          animations: { [weak self] in self?.thumbImgView.image = temp },
+                          animations: { [weak self] in self?.thumbImgView.image = UIImage.scale(img: img, scale: 1) },
                           completion: nil)
     }
     
