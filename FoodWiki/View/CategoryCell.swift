@@ -12,17 +12,16 @@ class CategoryCell: UITableViewCell {
     @IBOutlet weak var thumbImgView: UIImageView!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
-    @IBOutlet weak var moreInfoImgView: UIImageView!
+    @IBOutlet weak var moreInfoImgView: UIImageView! {
+        didSet {
+            let singleTap = UITapGestureRecognizer(target: self, action: #selector(moreInfoTapDetected))
+            moreInfoImgView.isUserInteractionEnabled = true
+            moreInfoImgView.addGestureRecognizer(singleTap)
+        }
+    }
     
     let animationTime = 0.25
     var delegate: CategoryCellProtocol?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(moreInfoTapDetected))
-        moreInfoImgView.isUserInteractionEnabled = true
-        moreInfoImgView.addGestureRecognizer(singleTap)
-    }
     
     @objc func moreInfoTapDetected() {
         delegate?.moreInfoTapped(cell: self)
