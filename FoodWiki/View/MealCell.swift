@@ -14,10 +14,6 @@ class MealCell: UITableViewCell {
     
     let animationTime = 0.25
     
-    func setImageViewLoading() {
-        thumbImgView.backgroundColor = UIColor.systemFill
-    }
-    
     func setImage(img: UIImage) {
         UIView.animate(withDuration: animationTime) {
             
@@ -31,7 +27,6 @@ class MealCell: UITableViewCell {
     }
     
     func setMealInfo(mealInfo: MealInfo) {
-        setImageViewLoading()
         UIView.animate(withDuration: animationTime) {
             
             self.nameLbl.layer.backgroundColor = UIColor.clear.cgColor
@@ -47,7 +42,5 @@ class MealCell: UITableViewCell {
     func setCategoryUILoading() {
         nameLbl.layer.backgroundColor = UIColor.systemGray5.cgColor
         nameLbl.text = ""
-        
-        setImageViewLoading()
     }
 }

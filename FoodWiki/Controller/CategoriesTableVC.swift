@@ -48,8 +48,6 @@ class CategoriesTableVC: GenericFoodListTableVC {
         
         if let categoryThumb = categoryThumb {
             cell.setImage(img: categoryThumb)
-        } else {
-            cell.setImageViewLoading()
         }
         
         return cell

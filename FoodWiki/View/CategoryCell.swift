@@ -28,10 +28,6 @@ class CategoryCell: UITableViewCell {
         delegate?.moreInfoTapped(cell: self)
     }
     
-    func setImageViewLoading() {
-        thumbImgView.backgroundColor = UIColor.systemFill
-    }
-    
     func setImage(img: UIImage) {
         UIView.animate(withDuration: animationTime) {
             
@@ -45,7 +41,6 @@ class CategoryCell: UITableViewCell {
     }
     
     func setCategoryData(categoryData: Category) {
-        setImageViewLoading()
         UIView.animate(withDuration: animationTime) {
             
             self.moreInfoImgView.isHidden = false
@@ -74,7 +69,6 @@ class CategoryCell: UITableViewCell {
         descriptionLbl.text = ""
         moreInfoImgView.isHidden = true
         
-        setImageViewLoading()
     }
 }
 

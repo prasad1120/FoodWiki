@@ -57,8 +57,6 @@ class MealsTableVC: GenericFoodListTableVC {
 
         if let mealThumb = mealThumb {
             cell.setImage(img: mealThumb)
-        } else {
-            cell.setImageViewLoading()
         }
         
         return cell
